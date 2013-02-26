@@ -31,45 +31,71 @@
 
 		<!-- Provides JavaFX for Java 6. -->
 		<!-- TODO verify location on Linux/MacOSX/Windows -->
-		<dependency>
-			<groupId>com.oracle.jdk</groupId>
-			<artifactId>javafx</artifactId>
-			<version>1.6.0</version>
-			<type>jar</type>
-			<scope>system</scope>
-			<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-		</dependency>
 
 		<!-- Provides JavaFX for Java 7. -->
 		<!-- Linux/MacOSX/Windows use same JavaFX location. -->
-		<dependency>
-			<groupId>com.oracle.jdk</groupId>
-			<artifactId>javafx</artifactId>
-			<version>1.7.0</version>
-			<type>jar</type>
-			<scope>system</scope>
-			<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-		</dependency>
+
 
 	</dependencies>
 
 	<profiles>
 
-		<!-- TODO activate profiles to provided specific JavaFX location, depending 
-			on O/S type and Java version. -->
+		<!-- Profiles tested on Mac, please verify for Windows/Linux -->
 
-		<profile>
-			<id>java-6</id>
+		<profile> 
+            <id>linux</id> 
+            <activation> 
+                <os> 
+                    <family>unix</family> 
+                </os> 
+            </activation> 
+            <dependencies>
+				<dependency>
+					<groupId>com.oracle.jdk</groupId>
+					<artifactId>javafx</artifactId>
+					<version>1.7.0</version>
+					<type>jar</type>
+					<scope>system</scope>
+					<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+				</dependency>
+			</dependencies>
+        </profile> 
+        <profile>
+			<id>java-7-macosx</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
 			<dependencies>
+				<dependency>
+					<groupId>com.oracle.jdk</groupId>
+					<artifactId>javafx</artifactId>
+					<version>1.7.0</version>
+					<type>jar</type>
+					<scope>system</scope>
+					<systemPath>/Library/Java/JavaVirtualMachines/jdk1.7.0_15.jdk/Contents/Home/jre/lib/jfxrt.jar</systemPath>
+				</dependency>
 			</dependencies>
 		</profile>
-
-		<profile>
-			<id>java-7</id>
-			<dependencies>
+        <profile> 
+            <id>windows</id> 
+            <activation> 
+                <os> 
+                    <family>windows</family> 
+                </os> 
+            </activation> 
+            <dependencies>
+				<dependency>
+					<groupId>com.oracle.jdk</groupId>
+					<artifactId>javafx</artifactId>
+					<version>1.7.0</version>
+					<type>jar</type>
+					<scope>system</scope>
+					<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+				</dependency>
 			</dependencies>
-		</profile>
-
+        </profile> 
 	</profiles>
 
 </project>
