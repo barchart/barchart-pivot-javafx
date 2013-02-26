@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.barchart.base</groupId>
+		<artifactId>barchart-archon</artifactId>
+		<version>2.1.1</version>
+	</parent>
+
+	<groupId>com.barchart.pivot</groupId>
+	<artifactId>barchart-pivot-javafx</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<properties>
+
+		<pivotGroupId>com.barchart.pivot</pivotGroupId>
+		<pivotVersion>2.0.1-build002-SNAPSHOT</pivotVersion>
+
+	</properties>
+
+	<dependencies>
+
+		<!-- Core pivot API. -->
+		<dependency>
+			<groupId>${pivotGroupId}</groupId>
+			<artifactId>pivot-core</artifactId>
+			<version>${pivotVersion}</version>
+		</dependency>
+
+		<!-- Provides JavaFX for Java 6. -->
+		<!-- TODO verify location on Linux/MacOSX/Windows -->
+		<dependency>
+			<groupId>com.oracle.jdk</groupId>
+			<artifactId>javafx</artifactId>
+			<version>1.6.0</version>
+			<type>jar</type>
+			<scope>system</scope>
+			<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+		</dependency>
+
+		<!-- Provides JavaFX for Java 7. -->
+		<!-- Linux/MacOSX/Windows use same JavaFX location. -->
+		<dependency>
+			<groupId>com.oracle.jdk</groupId>
+			<artifactId>javafx</artifactId>
+			<version>1.7.0</version>
+			<type>jar</type>
+			<scope>system</scope>
+			<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+
+		<!-- TODO activate profiles to provided specific JavaFX location, depending 
+			on O/S type and Java version. -->
+
+		<profile>
+			<id>java-6</id>
+			<dependencies>
+			</dependencies>
+		</profile>
+
+		<profile>
+			<id>java-7</id>
+			<dependencies>
+			</dependencies>
+		</profile>
+
+	</profiles>
+
+</project>
