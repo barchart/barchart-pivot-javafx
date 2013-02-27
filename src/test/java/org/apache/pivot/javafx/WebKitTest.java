@@ -1,6 +1,5 @@
 package org.apache.pivot.javafx;
 
-
 import org.junit.After;
 import org.junit.Before;
 
@@ -12,6 +11,10 @@ public class WebKitTest {
 
 	@After
 	public void tearDown() throws Exception {
+	}
+
+	public static void main(final String... args) {
+
 	}
 
 }

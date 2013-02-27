@@ -6,15 +6,20 @@
 	<parent>
 		<groupId>com.barchart.base</groupId>
 		<artifactId>barchart-archon</artifactId>
-		<version>2.1.1</version>
+		<version>2.4.0</version>
 	</parent>
 
 	<groupId>com.barchart.pivot</groupId>
 	<artifactId>barchart-pivot-javafx</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<properties>
 
+		<!-- Generate Java 6 classes. -->
+		<projectJavaVersion>1.6</projectJavaVersion>
+
+		<!-- Use custom pivot. -->
 		<pivotGroupId>com.barchart.pivot</pivotGroupId>
 		<pivotVersion>2.0.1-build002-SNAPSHOT</pivotVersion>
 
@@ -22,34 +27,36 @@
 
 	<dependencies>
 
-		<!-- Core pivot API. -->
+		<!-- Platform UI. -->
 		<dependency>
 			<groupId>${pivotGroupId}</groupId>
 			<artifactId>pivot-core</artifactId>
 			<version>${pivotVersion}</version>
 		</dependency>
-
-		<!-- Provides JavaFX for Java 6. -->
-		<!-- TODO verify location on Linux/MacOSX/Windows -->
-
-		<!-- Provides JavaFX for Java 7. -->
-		<!-- Linux/MacOSX/Windows use same JavaFX location. -->
-
+		<dependency>
+			<groupId>${pivotGroupId}</groupId>
+			<artifactId>pivot-wtk</artifactId>
+			<version>${pivotVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>${pivotGroupId}</groupId>
+			<artifactId>pivot-wtk-skin-terra</artifactId>
+			<version>${pivotVersion}</version>
+		</dependency>
 
 	</dependencies>
 
 	<profiles>
 
-		<!-- Profiles tested on Mac, please verify for Windows/Linux -->
-
-		<profile> 
-            <id>linux</id> 
-            <activation> 
-                <os> 
-                    <family>unix</family> 
-                </os> 
-            </activation> 
-            <dependencies>
+		<!-- Activate for Linux. -->
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<dependencies>
 				<dependency>
 					<groupId>com.oracle.jdk</groupId>
 					<artifactId>javafx</artifactId>
@@ -59,9 +66,11 @@
 					<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
 				</dependency>
 			</dependencies>
-        </profile> 
-        <profile>
-			<id>java-7-macosx</id>
+		</profile>
+
+		<!-- Activate for Mac OS X. -->
+		<profile>
+			<id>macosx</id>
 			<activation>
 				<os>
 					<family>mac</family>
@@ -78,14 +87,16 @@
 				</dependency>
 			</dependencies>
 		</profile>
-        <profile> 
-            <id>windows</id> 
-            <activation> 
-                <os> 
-                    <family>windows</family> 
-                </os> 
-            </activation> 
-            <dependencies>
+
+		<!-- Activate for Windows. -->
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<dependencies>
 				<dependency>
 					<groupId>com.oracle.jdk</groupId>
 					<artifactId>javafx</artifactId>
@@ -95,7 +106,8 @@
 					<systemPath>${java.home}/lib/jfxrt.jar</systemPath>
 				</dependency>
 			</dependencies>
-        </profile> 
+		</profile>
+
 	</profiles>
 
 </project>
