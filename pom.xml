@@ -13,6 +13,13 @@
 	<artifactId>barchart-pivot-javafx</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
+	
+	<scm>
+		<url>https://github.com/barchart/barchart-pivot-javafx</url>
+		<connection>scm:git:git://github.com/barchart/barchart-pivot-javafx.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/barchart/barchart-pivot-javafx.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<properties>
 
