@@ -21,7 +21,7 @@
 
 		<!-- Use custom pivot. -->
 		<pivotGroupId>com.barchart.pivot</pivotGroupId>
-		<pivotVersion>2.0.2-build002-SNAPSHOT</pivotVersion>
+		<pivotVersion>2.0.2-build004-SNAPSHOT</pivotVersion>
 
 	</properties>
 
