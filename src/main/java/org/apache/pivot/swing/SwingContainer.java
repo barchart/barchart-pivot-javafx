@@ -8,7 +8,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
+import javax.swing.JFrame;
 import javax.swing.JWindow;
 
 import org.apache.pivot.wtk.Component;
@@ -119,6 +122,18 @@ public class SwingContainer extends Container {
 							delegate.setVisible(true);
 						}
 					});
+					((DesktopFrame)topLevelWindow).addWindowStateListener(new WindowStateListener() {
+						@Override
+						public void windowStateChanged(WindowEvent e) {
+							if((e.getNewState() & JFrame.ICONIFIED) == JFrame.ICONIFIED) {
+								delegate.setVisible(false);
+							}else{
+								delegate.setVisible(true);
+								delegate.toFront();
+							}
+						}
+						
+					});
 				}
 				topLevelWindow.addComponentListener(new ComponentAdapter() {
 					@Override
@@ -133,7 +148,7 @@ public class SwingContainer extends Container {
 		visibilityTimer = new javax.swing.Timer(250, new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				delegate.setVisible(true);
-				delegate.repaint();
+				delegate.requestFocus();
 			}
 		});
 		
