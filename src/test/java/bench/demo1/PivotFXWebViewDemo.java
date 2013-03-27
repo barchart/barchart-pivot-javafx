@@ -1,20 +1,27 @@
 package bench.demo1;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+
+import javafx.scene.web.WebView;
 
 import org.apache.pivot.collections.Map;
 import org.apache.pivot.javafx.FXWebView;
+import org.apache.pivot.swing.BarChartTitleBarControl;
 import org.apache.pivot.swing.SwingContainer;
 import org.apache.pivot.wtk.Application;
 import org.apache.pivot.wtk.DesktopApplicationContext;
+import org.apache.pivot.wtk.DesktopFrame;
 import org.apache.pivot.wtk.Dimensions;
 import org.apache.pivot.wtk.Display;
 import org.apache.pivot.wtk.HorizontalAlignment;
 import org.apache.pivot.wtk.Label;
+import org.apache.pivot.wtk.OSXTitleBar;
 import org.apache.pivot.wtk.Orientation;
 import org.apache.pivot.wtk.Point;
 import org.apache.pivot.wtk.SplitPane;
+import org.apache.pivot.wtk.TitleBarControl;
 import org.apache.pivot.wtk.VerticalAlignment;
 import org.apache.pivot.wtk.Window;
 
@@ -59,12 +66,12 @@ public class PivotFXWebViewDemo extends Application.Adapter {
         //Apache Pivot Container that can contain SWING components
         SwingContainer container = new SwingContainer(split);
         //Method used to add a Swing component to the container
-        container.addSwingComponent(new FXWebView("http://apple.com"));
+        container.addSwingComponent(new FXWebView("http://google.com"));
         //Simply add the SwingContainer to any Apache Pivot container
         split.setRight(container);
  
         window.setContent(split);
-        window.setTitle("Hello World!");
+        window.setTitle("WebView Demo");
         window.setMaximized(true);
         
         window.setLocation(new Point(0,0));
@@ -72,6 +79,19 @@ public class PivotFXWebViewDemo extends Application.Adapter {
         
         //Show window.
         window.open(display);
+        
+        
+        //Tomorrow build out osx and windows titlebars
+        java.awt.Window hostFrame = window.getDisplay().getHostWindow();
+        if(hostFrame instanceof DesktopFrame) {
+        	OSXTitleBar titleBar = new OSXTitleBar();
+        	titleBar.setSize(200, 22);
+        	titleBar.setPreferredSize(new Dimension(0, 22));
+        	TitleBarControl tbc = new BarChartTitleBarControl();
+        	tbc.setPreferredSize(new Dimension(24, 22));
+        	titleBar.addTitleBarControl(tbc);
+        	((DesktopFrame)hostFrame).setTitleBar(titleBar);
+        }
     }
 	
 	public static void main(String[] args) {
