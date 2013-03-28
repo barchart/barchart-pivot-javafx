@@ -1,4 +1,4 @@
-package bench.demo1;
+package bench.demo0;
 
 import java.awt.Color;
 import java.awt.Dimension;
