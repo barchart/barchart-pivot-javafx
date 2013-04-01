@@ -64,7 +64,7 @@ public class PivotFXWebViewDemo extends Application.Adapter {
         //Apache Pivot Container that can contain SWING components
         SwingContainer container = new SwingContainer(split);
         //Method used to add a Swing component to the container
-        container.addSwingComponent(new FXWebView("http://google.com"));
+        container.addSwingComponent(new FXWebView("http://yahoo.com"));
         //Simply add the SwingContainer to any Apache Pivot container
         split.setRight(container);
  

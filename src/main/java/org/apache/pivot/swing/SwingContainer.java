@@ -97,68 +97,69 @@ public class SwingContainer extends Container {
 		parent.getContainerListeners().add(createContainerListener());
 		
 		//Keeps the delegate window in front.
-		Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
-			@Override
-			public void eventDispatched(AWTEvent event) {
-				if(event.getID() == MouseEvent.MOUSE_PRESSED) {
-					delegate.toFront();				
-				}
-			}
-		}, AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK);
+//		Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+//			@Override
+//			public void eventDispatched(AWTEvent event) {
+//				if(event.getID() == MouseEvent.MOUSE_PRESSED) {
+//					delegate.toFront();				
+//				}
+//			}
+//		}, AWTEvent.MOUSE_EVENT_MASK | AWTEvent.MOUSE_MOTION_EVENT_MASK);
 		
-		(new Thread() {
-			public void run() {
-				while ((display = parent.getDisplay()) == null) {
-					try { Thread.sleep(2000); } catch(Exception e) { e.printStackTrace(); }
-				}
-				topLevelWindow = display.getHostWindow();
-				if(topLevelWindow instanceof DesktopFrame) {
-					((DesktopFrame)topLevelWindow).addDragListener(new DragListener() {
-						public void windowDragged(Point oldLoc, Point newLoc) {
-							delegate.setVisible(false);
-						}
-						public void draggingStopped() {
-							Point p = getLocationOnScreen();
-							moveWindow(p.x, p.y);
-							delegate.setVisible(true);
-						}
-					});
-					((DesktopFrame)topLevelWindow).addWindowStateListener(new WindowStateListener() {
-						@Override
-						public void windowStateChanged(WindowEvent e) {
-							if((e.getNewState() & JFrame.ICONIFIED) == JFrame.ICONIFIED) {
-								delegate.setVisible(false);
-							}else{
-								delegate.setVisible(true);
-								delegate.toFront();
-							}
-						}
-					});
-					((DesktopFrame)topLevelWindow).getTitleBar().addIconizeListener(new TitleBar.IconizeListener() {
-						@Override
-						public void frameWillIconize() {
-							delegate.setVisible(false);
-						}
-					});
-				}
-				topLevelWindow.addComponentListener(new ComponentAdapter() {
-					@Override
-					public void componentMoved(ComponentEvent e) {
-						Point p = getLocationOnScreen();
-						moveWindow(p.x, p.y);
-					}
-				});
-			}
-		}).start();
+//		(new Thread() {
+//			public void run() {
+//				while ((display = parent.getDisplay()) == null) {
+//					try { Thread.sleep(2000); } catch(Exception e) { e.printStackTrace(); }
+//				}
+//				topLevelWindow = display.getHostWindow();
+//				if(topLevelWindow instanceof DesktopFrame) {
+//					((DesktopFrame)topLevelWindow).addDragListener(new DragListener() {
+//						public void windowDragged(Point oldLoc, Point newLoc) {
+//							delegate.setVisible(false);
+//						}
+//						public void draggingStopped() {
+//							Point p = getLocationOnScreen();
+//							moveWindow(p.x, p.y);
+//							delegate.setVisible(true);
+//						}
+//					});
+//					((DesktopFrame)topLevelWindow).addWindowStateListener(new WindowStateListener() {
+//						@Override
+//						public void windowStateChanged(WindowEvent e) {
+//							if((e.getNewState() & JFrame.ICONIFIED) == JFrame.ICONIFIED) {
+//								delegate.setVisible(false);
+//							}else{
+//								delegate.setVisible(true);
+//								delegate.toFront();
+//							}
+//						}
+//					});
+//					((DesktopFrame)topLevelWindow).getTitleBar().addIconizeListener(new TitleBar.IconizeListener() {
+//						@Override
+//						public void frameWillIconize() {
+//							delegate.setVisible(false);
+//						}
+//					});
+//				}
+//				topLevelWindow.addComponentListener(new ComponentAdapter() {
+//					@Override
+//					public void componentMoved(ComponentEvent e) {
+//						Point p = getLocationOnScreen();
+//						moveWindow(p.x, p.y);
+//					}
+//				});
+//			}
+//		}).start();
 		
-		visibilityTimer = new javax.swing.Timer(250, new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent e) {
-				delegate.setVisible(true);
-				delegate.requestFocus();
-			}
-		});
+//		visibilityTimer = new javax.swing.Timer(250, new java.awt.event.ActionListener() {
+//			public void actionPerformed(java.awt.event.ActionEvent e) {
+//				delegate.setVisible(true);
+//				delegate.requestFocus();
+//			}
+//		});
+//		
+//		visibilityTimer.setRepeats(false);
 		
-		visibilityTimer.setRepeats(false);
 	}
 	
 	/**
@@ -182,8 +183,8 @@ public class SwingContainer extends Container {
 	 * @param	h	height
 	 */
 	public void setSize(int w, int h) {
-		visibilityTimer.restart();
-		delegate.setVisible(false);
+		//visibilityTimer.restart();
+		//delegate.setVisible(false);
 		super.setSize(w,h);
 		delegate.setSize(w,h);
 		delegate.toFront();
@@ -234,13 +235,11 @@ public class SwingContainer extends Container {
         		java.awt.Window window = ((Display)component).getHostWindow();
         		xLocal += window.getX();
                 yLocal += window.getY();
-                if(true || insets == null) {
-                	if(window instanceof DesktopFrame) {
-                		insets = ((DesktopFrame)window).getTitlebarInsets();
-                	}else{
-                		insets = window.getInsets();
-                	}
-                }
+                if(window instanceof DesktopFrame) {
+            		insets = ((DesktopFrame)window).getTitlebarInsets();
+            	}else{
+            		insets = window.getInsets();
+            	}
                 xLocal += insets.left;
                 yLocal += insets.top;
                 break;
