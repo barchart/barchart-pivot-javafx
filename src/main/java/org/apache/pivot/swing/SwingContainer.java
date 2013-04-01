@@ -22,6 +22,7 @@ import org.apache.pivot.wtk.DesktopFrame.DragListener;
 import org.apache.pivot.wtk.Display;
 import org.apache.pivot.wtk.Panel;
 import org.apache.pivot.wtk.Skin;
+import org.apache.pivot.wtk.TitleBar;
 import org.apache.pivot.wtk.skin.PanelSkin;
 
 
@@ -132,7 +133,12 @@ public class SwingContainer extends Container {
 								delegate.toFront();
 							}
 						}
-						
+					});
+					((DesktopFrame)topLevelWindow).getTitleBar().addIconizeListener(new TitleBar.IconizeListener() {
+						@Override
+						public void frameWillIconize() {
+							delegate.setVisible(false);
+						}
 					});
 				}
 				topLevelWindow.addComponentListener(new ComponentAdapter() {
@@ -228,7 +234,7 @@ public class SwingContainer extends Container {
         		java.awt.Window window = ((Display)component).getHostWindow();
         		xLocal += window.getX();
                 yLocal += window.getY();
-                if(insets == null) {
+                if(true || insets == null) {
                 	if(window instanceof DesktopFrame) {
                 		insets = ((DesktopFrame)window).getTitlebarInsets();
                 	}else{
