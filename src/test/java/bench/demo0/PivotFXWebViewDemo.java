@@ -62,7 +62,7 @@ public class PivotFXWebViewDemo extends Application.Adapter {
         split.setLeft(label);
         
         //Apache Pivot Container that can contain SWING components
-        SwingContainer container = new SwingContainer(split);
+        SwingContainer container = new SwingContainer();
         //Method used to add a Swing component to the container
         container.addSwingComponent(new FXWebView("http://yahoo.com"));
         //Simply add the SwingContainer to any Apache Pivot container
@@ -88,12 +88,21 @@ public class PivotFXWebViewDemo extends Application.Adapter {
         		
         		SwingUtilities.invokeLater(new Runnable() {
         			public void run() {
-        				System.out.println("thread firing");
         				if(hostFrame instanceof DesktopFrame) {
         					DesktopFrame.Style.NATIVE_WIN.apply((DesktopFrame)hostFrame);
         				}
         			}
         		});
+        		
+//        		try { Thread.sleep(4000); }catch(Exception e) { e.printStackTrace(); }
+//        		
+//        		SwingUtilities.invokeLater(new Runnable() {
+//        			public void run() {
+//        				if(hostFrame instanceof DesktopFrame) {
+//        					DesktopFrame.Style.NATIVE_OSX.apply((DesktopFrame)hostFrame);
+//        				}
+//        			}
+//        		});
         	}
         }).start();
     }
